@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
-import { Form, FormField, SubmitButton } from "../components/forms";
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../components/forms";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -12,13 +18,24 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen(props) {
+  const [regFailed, setRegFailed] = useState(false);
+  const authContext = useContext(AuthContext);
+
+  const handleSubmit = async ({ email, password }) => {
+    if (!email.includes("gvsu.edu")) return setLoginFailed(true);
+    setRegFailed(false);
+    const user = { email: email, password: password };
+    authContext.setUser(user);
+  };
+
   return (
     <Screen style={styles.container}>
       <Form
         initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
+        <ErrorMessage error="Use your gvsu email." visible={regFailed} />
         <FormField
           autoCorrect={false}
           icon="account"

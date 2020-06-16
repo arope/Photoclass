@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
-import { Form, FormField, SubmitButton } from "../components/forms";
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../components/forms";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -11,15 +17,27 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen(props) {
+  const [loginFailed, setLoginFailed] = useState(false);
+  const authContext = useContext(AuthContext);
+
+  const handleSubmit = ({ email, password }) => {
+    if (!email.includes("gvsu.edu")) return setLoginFailed(true);
+    setLoginFailed(false);
+    const user = { email: email, password: password };
+    authContext.setUser(user);
+  };
+
   return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/rank_logo.png")} />
 
       <Form
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
+        <ErrorMessage error="Invalid gvsu email." visible={loginFailed} />
+
         <FormField
           autoCapitalize="none"
           autoCorrect={false}

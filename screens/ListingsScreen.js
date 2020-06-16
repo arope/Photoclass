@@ -9,6 +9,7 @@ import {
   setupPhotoclassListener,
   initPhotoclassDB,
 } from "../firebase/fb-photoclass";
+import routes from "../navigation/routes";
 
 const listings = [
   {
@@ -41,7 +42,7 @@ const listings = [
   },
 ];
 
-function ListingsScreen({ props, route }) {
+function ListingsScreen({ navigation }) {
   const [display, setDisplay] = useState("All");
   const [photos, setPhotos] = useState([]);
 
@@ -120,6 +121,7 @@ function ListingsScreen({ props, route }) {
             //  subTitle={"$" + item.price}
             // image={item.image}
             imageUrl={item.url}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />

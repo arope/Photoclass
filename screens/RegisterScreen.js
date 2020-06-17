@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -22,7 +22,7 @@ function RegisterScreen(props) {
   const authContext = useContext(AuthContext);
 
   const handleSubmit = async ({ email, password }) => {
-    if (!email.includes("gvsu.edu")) return setLoginFailed(true);
+    if (!email.includes("gvsu.edu")) return setRegFailed(true);
     setRegFailed(false);
     const user = { email: email, password: password };
     authContext.setUser(user);

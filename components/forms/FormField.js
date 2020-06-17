@@ -8,7 +8,6 @@ function AppFormField({ name, width, ...otherProps }) {
   const {
     setFieldTouched,
     setFieldValue,
-    // handleChange,
     errors,
     touched,
     values,

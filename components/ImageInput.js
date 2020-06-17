@@ -9,26 +9,12 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
-// import {
-//   initPhotoclassDB,
-//   uploadImage,
-//   storeReminderItem,
-// } from "../firebase/fb-photoclass";
-
 import colors from "../config/colors";
 
 function ImageInput({ imageUri, onChangeImage }) {
   useEffect(() => {
     requestPermission();
   }, []);
-
-  // useEffect(() => {
-  //   try {
-  //     initPhotoclassDB();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, []);
 
   const requestPermission = async () => {
     const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -52,14 +38,6 @@ function ImageInput({ imageUri, onChangeImage }) {
       });
       if (!result.cancelled) {
         onChangeImage(result.uri);
-        // let finalImage = await uploadImage(
-        //   result.uri,
-        //   "At the cinema",
-        //   "Class-B",
-        //   (progress) => {
-        //     console.log(progress);
-        //   }
-        // );
       }
     } catch (error) {
       console.log("Error reading an image", error);

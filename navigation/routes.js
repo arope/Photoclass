@@ -1,7 +1,6 @@
 export default Object.freeze({
-  LISTING_DETAILS: "ListingDetails",
-  LISTING_EDIT: "ListingEdit",
+  PHOTOCLASS_DETAILS: "PhotoclassDetails",
+  PHOTOCLASS_EDIT: "PhotoclassEdit",
   LOGIN: "Login",
-  MESSAGES: "Messages",
   REGISTER: "Register",
 });

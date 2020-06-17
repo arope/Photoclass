@@ -5,7 +5,7 @@ import colors from "../config/colors";
 import Text from "../components/Text";
 import Screen from "../components/Screen";
 
-function ListingDetailsScreen({ route }) {
+function PhotoclassDetailsScreen({ route }) {
   const photo = route.params;
 
   return (
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListingDetailsScreen;
+export default PhotoclassDetailsScreen;

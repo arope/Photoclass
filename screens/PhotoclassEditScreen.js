@@ -23,25 +23,25 @@ const validationSchema = Yup.object().shape({
 const categories = [
   {
     backgroundColor: "#26de81",
-    icon: "floor-lamp",
+    icon: "cards-spade",
     label: "Class-S",
     value: 1,
   },
   {
     backgroundColor: "#fed330",
-    icon: "car",
+    icon: "cards-heart",
     label: "Class-A",
     value: 2,
   },
   {
     backgroundColor: "#4b7bec",
-    icon: "camera",
+    icon: "cards-diamond",
     label: "Class-B",
     value: 3,
   },
   {
     backgroundColor: "#a55eea",
-    icon: "cards",
+    icon: "cards-club",
     label: "Class-C",
     value: 4,
   },

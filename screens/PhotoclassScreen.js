@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, View, Text, Button } from "react-native";
+import { FlatList, StyleSheet, View, Text, Button, Alert } from "react-native";
 
 import Screen from "../components/Screen";
 import Card from "../components/Card";
@@ -7,8 +7,10 @@ import colors from "../config/colors";
 import {
   setupPhotoclassListener,
   initPhotoclassDB,
+  deletePhoto,
 } from "../firebase/fb-photoclass";
 import routes from "../navigation/routes";
+import Toast from "react-native-root-toast";
 
 function PhotoclassScreen({ navigation }) {
   const [display, setDisplay] = useState("All");
@@ -87,6 +89,26 @@ function PhotoclassScreen({ navigation }) {
             title={item.title}
             imageUrl={item.url}
             onPress={() => navigation.navigate(routes.PHOTOCLASS_DETAILS, item)}
+            onLongPress={() => {
+              Alert.alert(
+                "Delete",
+                "Are you sure you want to delete this photo?",
+                [
+                  {
+                    text: "Yes",
+                    onPress: () => {
+                      deletePhoto(item);
+                      Toast.show(`Deleted ${item.title}`, {
+                        duration: Toast.durations.SHORT,
+                        animation: true,
+                        hideOnPress: true,
+                      });
+                    },
+                  },
+                  { text: "No" },
+                ]
+              );
+            }}
           />
         )}
       />

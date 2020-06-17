@@ -77,11 +77,28 @@ export function setupPhotoclassListener(updateFunc) {
             class: fbObject[key]["class"],
             url: fbObject[key]["URL"],
             id: key,
+            name: fbObject[key]["name"],
           });
         });
         updateFunc(newArr);
       } else {
         updateFunc([]);
       }
+    });
+}
+
+export function deletePhoto(item) {
+  var storageRef = firebase.storage().ref();
+  var deleteRef = storageRef.child("images/" + item.name);
+  // Delete the file
+  deleteRef
+    .delete()
+    .then(function () {
+      // File deleted successfully
+      firebase.database().ref(`assets/${item.id}`).remove();
+    })
+    .catch(function (error) {
+      // Uh-oh, an error occurred!
+      console.log(error);
     });
 }

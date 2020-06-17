@@ -9,9 +9,9 @@ import {
 import Text from "./Text";
 import colors from "../config/colors";
 
-function Card({ title, subTitle, imageUrl, image, onPress }) {
+function Card({ title, subTitle, imageUrl, image, onPress, onLongPress }) {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={onPress} onLongPress={onLongPress}>
       <View style={styles.card}>
         <Image
           style={styles.image}
